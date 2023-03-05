@@ -8,7 +8,7 @@ using System;
 // (this project will still import implicit usings, though)
 
 // namespaces are used to organize and provide levels of separation in code (similar to modules in Node.js)
-// namepsaces are linke contains that have members - members can be another namepsae, a method, or class
+// namepsaces are like containers that have members - members can be another namespace, a method, or class
 namespace CatWorx.BadgeMaker
 // everything below can be interpreted as members of this namespace
 {
@@ -19,8 +19,22 @@ namespace CatWorx.BadgeMaker
         // void - return of this executable method is of type void (nothing is returned)
         static void Main(string[] args)
         {
-            // because we imported System above, we don't need to type System.Console
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Hello, World!"); // because we imported System above, we don't need to type System.Console
+
+            // STRINGS
+            // C# is a statically typed language, variables are declared using a data-type keyword (as opposed to a var/let/const)
+            string greeting = "Hello"; // double quotes must be used for strings in C#
+            greeting = greeting + " " + "World";
+            Console.WriteLine("greeting:" + " " + greeting);
+
+            // String interpolation
+            string hello = "NEW";
+            Console.WriteLine($"greeting: {greeting}"); // (similar to a template literal)
+            Console.WriteLine("greeting: {0}", greeting); // interpolates the variable by associating the zero index with the second argument of the function call
+            Console.WriteLine("greeting: {1}", greeting, hello);
+
+            // NUMBERS
+            
         }
     }
 }
