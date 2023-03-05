@@ -22,6 +22,7 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine("Hello, World!"); // because we imported System above, we don't need to type System.Console
 
             // STRINGS
+            Console.WriteLine("\nSTRINGS");
             // C# is a statically typed language, variables are declared using a data-type keyword (as opposed to a var/let/const)
             string greeting = "Hello"; // double quotes must be used for strings in C#
             greeting = greeting + " " + "World";
@@ -34,6 +35,7 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine("greeting: {1}", greeting, hello);
 
             // NUMBERS
+            Console.WriteLine("\nNUMBERS");
             // float side = 3.14; - will generate an error because when we write a decimal with no suffix, its default type is "double"
             float side = 3.14F;
             float area = side * side;
@@ -53,6 +55,16 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine(num);
             num ++;
             Console.WriteLine(num);
+
+            // BOOLEANS
+            Console.WriteLine("\nBOOLEANS");
+            bool isCold = true;
+            Console.WriteLine(isCold ? "drink" : "add ice");
+            Console.WriteLine(!isCold ? "drink" : "add ice");
+
+            bool cold = false;
+            Console.WriteLine(cold ? "drink" : "add ice");
+            Console.WriteLine(!cold ? "drink" : "add ice");
         }
     }
 }
