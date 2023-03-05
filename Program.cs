@@ -65,6 +65,14 @@ namespace CatWorx.BadgeMaker
             bool cold = false;
             Console.WriteLine(cold ? "drink" : "add ice");
             Console.WriteLine(!cold ? "drink" : "add ice");
+
+            // Data Type Conversions
+            Console.WriteLine("\nDATA TYPE CONVERSIONS");
+            string stringNum = "2";
+            int intNum = Convert.ToInt32(stringNum);
+            Console.WriteLine(intNum);
+            Console.WriteLine(intNum.GetType()); // returns "System.Int32
+            // Int32 designates the storage available for the variable (32 bits or 2^32), Int16 and Int64 are other examples
         }
     }
 }
