@@ -34,7 +34,25 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine("greeting: {1}", greeting, hello);
 
             // NUMBERS
-            
+            // float side = 3.14; - will generate an error because when we write a decimal with no suffix, its default type is "double"
+            float side = 3.14F;
+            float area = side * side;
+            Console.WriteLine("area: {0}", area);
+            Console.WriteLine("area is a {0}", area.GetType()); // the GetType() method retrieves the data type of a variable
+            // this prints "System.Single" - a Single is 32-bit float and a Double is a 64-bit float
+
+            Console.WriteLine(2 * 3);
+            Console.WriteLine(10 % 3);
+            Console.WriteLine(1 + 2 * 3);     // C# executes order of operations
+            Console.WriteLine(10 / 3.0);      // will include decimal digits in quotient
+            Console.WriteLine(10 / 3);        // will round quotient
+            Console.WriteLine("12" + "3");
+
+            int num = 10;
+            num += 100;
+            Console.WriteLine(num);
+            num ++;
+            Console.WriteLine(num);
         }
     }
 }
