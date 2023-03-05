@@ -1,0 +1,1 @@
+## C# .Net CLI Security Badge Generator App
