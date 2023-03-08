@@ -1,4 +1,7 @@
-﻿// C# uses top-level statements as entry points to an application (replaces Main() function)
+﻿// .NET is a set of libraries and tools simialr to node.js and includes the .NET CLI, .NET runtime and libraries, and the dotnet driver
+// dotnet is a C# tool that allows you to install assemblies (similar to packages) and run c# apps from the command line
+
+// C# uses top-level statements as entry points to an application (replaces Main() function)
 // Console.WriteLine("Hello, World!");
 
 // below is the expanded version of the above top-level statement
@@ -9,6 +12,7 @@ using System;
 
 
 // dictionaries are similar to object literals and need to be imported to be used
+// C# lists (not C# arrays) are more similar to JS arrays and are also imported
 using System.Collections.Generic;
 
 // namespaces are used to organize and provide levels of separation in code (similar to modules in Node.js)
@@ -25,6 +29,7 @@ namespace CatWorx.BadgeMaker
         {
             Console.WriteLine("Hello, World!"); // because we imported System above, we don't need to type System.Console
 
+            // -----DATA TYPES--------------------------------------------------------------
             // STRINGS
             Console.WriteLine("\nSTRINGS");
             // C# is a statically typed language, variables are declared using a data-type keyword (as opposed to a var/let/const)
@@ -70,7 +75,8 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine(cold ? "drink" : "add ice");
             Console.WriteLine(!cold ? "drink" : "add ice");
 
-            // Data Type Conversions
+            // -----DATA TYPE CONVERSIONS--------------------------------------------------------------
+            // DATA TYPE CONVERSIONS
             Console.WriteLine("\nDATA TYPE CONVERSIONS");
             string stringNum = "2";
             int intNum = Convert.ToInt32(stringNum);
@@ -78,6 +84,7 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine(intNum.GetType()); // returns "System.Int32
             // Int32 designates the storage available for the variable (32 bits or 2^32), Int16 and Int64 are other examples
 
+            // -----DATA STRUCTURES--------------------------------------------------------------
             // DICTIONARIES
             Console.WriteLine("\nDICTIONARIES");
             // dictionaries use key-value pairs but the data types of the stored data must be explicitly stated when the dictionary is declared
@@ -110,6 +117,21 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine("   4   |    {0}", myScoreBoard["fourthInning"]);
             Console.WriteLine("   5   |    {0}", myScoreBoard["fifthInning"]);
             // the string value interpolates the value of the first value of the arguments passed into the WriteLine function, which matches the key in the dictionary
+        
+            // ARRAYS
+            Console.WriteLine("\nARRAYS");
+            // the data type of the array's elements must be declared - thus only a single data type can be contained in an array
+            // the length of an array must also be declared - no elements can be added to or subtracted from an array
+            string[] favFoods = new string[3]{"pizza", "doughnuts", "icecream"};
+            string firstFood = favFoods[0];
+            string secondFood = favFoods[1];
+            string thirdFood = favFoods[2];
+            Console.WriteLine("I like {0}, {1}, and {2}", firstFood, secondFood, thirdFood); // don't forget string interpolation
+
+            // LISTS
+            Console.WriteLine("\nLISTS");
+            // lists are more similar to JS arrays because their lengths are not static
+            
         }
     }
 }
