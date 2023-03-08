@@ -131,7 +131,10 @@ namespace CatWorx.BadgeMaker
             // LISTS
             Console.WriteLine("\nLISTS");
             // lists are more similar to JS arrays because their lengths are not static
-            
+            List<string> employees = new List<string>() {"adam", "amy"};
+            employees.Add("barbara");
+            employees.Add("billy");
+            Console.WriteLine("My employees include {0}, {1}, {2}, and {3}", employees[0], employees[1], employees[2], employees[3]);
         }
     }
 }
