@@ -12,7 +12,21 @@ namespace CatWorx.BadgeMaker
         // void - return type of this executable method (nothing is returned)
         static void Main(string[] args)
         {
-            
+            // intialize a list of string values called employees that already contains two strings
+            List<string> employees = new List<string>() {"adam", "amy"};
+            // add two new names to the employees list
+            employees.Add("barbara");
+            employees.Add("billy");
+            Console.WriteLine("Please enter a name :");
+            // get a name from the console and assign it to a variable
+            string input = Console.ReadLine() ?? ""; // .NET runtime halts here and waits for input before it continues executing on the next line
+            // the null coalescing operator ?? is similar to ternary
+            // ?? checks whether the value from the command line is null (because input can only be of type string) and replaces it with the value after the operator (here it's an empty string)
+            employees.Add(input);
+            for (int i = 0; i < employees.Count; i++)
+            {
+                Console.WriteLine(employees[i]);
+            }
         }
     }
 }
