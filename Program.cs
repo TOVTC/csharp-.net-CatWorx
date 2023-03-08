@@ -7,10 +7,13 @@ namespace CatWorx.BadgeMaker
 {
     class Program
     {
-        // Main() entry point function, initialized with or without parameters
-        // static - scope is class level, not object level (can be invoked without creating a new class instance first)
-        // void - return type of this executable method (nothing is returned)
-        static void Main(string[] args)
+        // in C#, a method declaration or signature looks like this (the []'d' sections are optional):
+        // [access_modifier] ["static"] return_type name([parameters])
+        // if a static method wants to call another method inside the same class directly, that method mst also be static
+        // because Main() is static, any other method it needs to call within the program must also be static
+
+        // the GetEmployees() method will return a list of employees, no parameters required
+        static List<string> GetEmployees()
         {
             // intialize a list of string values called employees that already contains two strings
             List<string> employees = new List<string>();
@@ -29,10 +32,27 @@ namespace CatWorx.BadgeMaker
                 }
                 employees.Add(input);
             }
+            // don't forget to return the generated list
+            return employees;
+        }
+
+        // the employees argument of type List is passed in when the method is called
+        static void PrintEmployees(List<string> employees)
+        {
             for (int i = 0; i < employees.Count; i++)
             {
                 Console.WriteLine(employees[i]);
             }
+        }
+
+        // Main() entry point function, initialized with or without parameters
+        // static - scope is class level, not object level (can be invoked without creating a new class instance first)
+        // void - return type of this executable method (nothing is returned)
+        static void Main(string[] args)
+        {
+            // we call our GetEmployees method and then call our PrintEmployees method, passing in the returned employee list
+            List<string> employees = GetEmployees();
+            PrintEmployees(employees);
         }
     }
 }
