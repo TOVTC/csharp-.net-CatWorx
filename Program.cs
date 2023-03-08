@@ -7,6 +7,10 @@ using System;
 // .NET 6.0 has a default setting called "implicit usings" that automatically imports System and other directives
 // (this project will still import implicit usings, though)
 
+
+// dictionaries are similar to object literals and need to be imported to be used
+using System.Collections.Generic;
+
 // namespaces are used to organize and provide levels of separation in code (similar to modules in Node.js)
 // namepsaces are like containers that have members - members can be another namespace, a method, or class
 namespace CatWorx.BadgeMaker
@@ -73,6 +77,39 @@ namespace CatWorx.BadgeMaker
             Console.WriteLine(intNum);
             Console.WriteLine(intNum.GetType()); // returns "System.Int32
             // Int32 designates the storage available for the variable (32 bits or 2^32), Int16 and Int64 are other examples
+
+            // DICTIONARIES
+            Console.WriteLine("\nDICTIONARIES");
+            // dictionaries use key-value pairs but the data types of the stored data must be explicitly stated when the dictionary is declared
+            // data types for a dictionary's key value pairs are declared with angled brackets e.g. <string, double> or <int, string>
+            Dictionary<string, int> myScoreBoard = new Dictionary<string, int>();
+            
+            // use the add() method to populate a dictionary
+            myScoreBoard.Add("firstInning", 10);
+            myScoreBoard.Add("secondInning", 20);
+            myScoreBoard.Add("thirdInning", 30);
+            myScoreBoard.Add("fourthInning", 40);
+            myScoreBoard.Add("fifthInning", 50);
+            
+            // you can also initialize a dictionary by listing the key-value pairs in a function call
+            Dictionary<string, int> mySecondScoreBoard = new Dictionary<string, int>(){
+                { "firstInning", 10 },
+                { "secondInning", 20},
+                { "thirdInning", 30},
+                { "fourthInning", 40},
+                { "fifthInning", 50}
+            };
+
+            Console.WriteLine("----------------");
+            Console.WriteLine("  Scoreboard");
+            Console.WriteLine("----------------");
+            Console.WriteLine("Inning |  Score");
+            Console.WriteLine("   1   |    {0}", myScoreBoard["firstInning"]);
+            Console.WriteLine("   2   |    {0}", myScoreBoard["secondInning"]);
+            Console.WriteLine("   3   |    {0}", myScoreBoard["thirdInning"]);
+            Console.WriteLine("   4   |    {0}", myScoreBoard["fourthInning"]);
+            Console.WriteLine("   5   |    {0}", myScoreBoard["fifthInning"]);
+            // the string value interpolates the value of the first value of the arguments passed into the WriteLine function, which matches the key in the dictionary
         }
     }
 }
