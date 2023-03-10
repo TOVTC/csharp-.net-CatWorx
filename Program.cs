@@ -58,8 +58,15 @@ namespace CatWorx.BadgeMaker
         {
             for (int i = 0; i < employees.Count; i++)
             {
-                // use the method in GetFullName to return a properly formatted employee first and last name
-                Console.WriteLine(employees[i].GetFullName());
+                // {0,-10} - we want the first argument {0} to be the id, left-aligned and padded to at least 10 characters {-10}
+                // {\t} - print a tab character
+                // {1,-20} - the next argument {1} is the name, left aligned and padded to 20 characters {-20}
+                // {\t} - print another tab
+                // {2} - print the last argument with no formatting
+                string template = "{0,-10}\t{1,-20}\t{2}";
+                // String.Format() takes a string to use as a template and operates like a template literal to fill in values
+                // in C#, each placeholder can define how its value is formatted and the values that follow the template in the list of arguments
+                Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetFullName(), employees[i].GetPhotoUrl()));
             }
         }
 

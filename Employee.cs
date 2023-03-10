@@ -12,14 +12,16 @@ namespace CatWorx.BadgeMaker
     // there are many different access modifiers, but this app will use public and private
     // in JS, there are no access modifiers, but the convention of underscore declarations such as "__sum", "__currentIndex()" simulates private variables
     // the underscores signal to other developers not to reference the variable anywhere else
+
     // in C#, access levels are a first-class language feature, and property access is part of the "encapsulation" principle of OOP software design
+    // users of a class shouldn't have to know how it operates or stores values, only the inputs and outputs, and using getters and setters on a class instance is standard practice
     class Employee{
         // PROPERTIES ----------------------------------------
         // accessModifier dataType propertyName
-        public string FirstName;
-        public string LastName;
-        public int Id;
-        public string PhotoUrl;
+        private string FirstName;
+        private string LastName;
+        private int Id;
+        private string PhotoUrl;
 
         // CONSTRUCTOR ----------------------------------------
         // in C#, a class's constructor method has the same name as its class and has a few specificities:
@@ -34,10 +36,24 @@ namespace CatWorx.BadgeMaker
         }
 
         // METHODS ----------------------------------------
-        // a getter to concatenate first and last name in proper formatting
+        // accessing properties indirectly through methods allows you to:
+        // process the property (e.g. validating, formatting) before returning
+        // change the type of the value before returning
+        // provide a stable interface to the property even if it changes internally (e.g. GetID() returns int ID, but if "the class [queries] a database to find the id based on the employee's name, which would be a string and would therefore require type conversion.")
+        // return different values based on the time of day (e.g. getGreeting() returns "Good Morning" or "Good Afternoon")
+
+        // to enhance encapsulation, instead of declaring properties as public, we create getters and setters to retrieve and update them
+        
+        // a method to concatenate first and last name in proper formatting
         // accessModifier dataType methodName
         public string GetFullName() {
             return FirstName + " " + LastName;
+        }
+        public int GetId() {
+            return Id;
+        }
+        public string GetPhotoUrl() {
+            return PhotoUrl;
         }
     }
 }
