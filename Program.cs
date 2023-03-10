@@ -20,7 +20,7 @@ namespace CatWorx.BadgeMaker
             // collect user values until the value is an empty string
             while (true)
             {
-                Console.WriteLine("Please enter a name :");
+                Console.WriteLine("Please enter a name : (leave empty to exit)");
                 // get a name from the console and assign it to a variable
                 string input = Console.ReadLine() ?? ""; // .NET runtime halts here and waits for input before it continues executing on the next line
                 // the null coalescing operator ?? is similar to ternary
@@ -30,6 +30,10 @@ namespace CatWorx.BadgeMaker
                     // break the while loop if the user hits enter without typing a name
                     break;
                 }
+                // Create a new Employee instance - we don't need to import the Employee class because of the namespace scope
+                // defining a class in C# registers that class name as a custom type
+                // dataType variableName = value;
+                Employee currentEmployee = new Employee();
                 employees.Add(input);
             }
             // don't forget to return the generated list
