@@ -33,8 +33,9 @@ namespace CatWorx.BadgeMaker
                 // Create a new Employee instance - we don't need to import the Employee class because of the namespace scope
                 // defining a class in C# registers that class name as a custom type
                 // dataType variableName = value;
-                Employee currentEmployee = new Employee();
-                employees.Add(input);
+                Employee currentEmployee = new Employee(input, "Smith");
+                // we use the GetFullName method from the Employee class to format and return each of our employee names
+                employees.Add(currentEmployee.GetFullName());
             }
             // don't forget to return the generated list
             return employees;
