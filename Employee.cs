@@ -14,20 +14,26 @@ namespace CatWorx.BadgeMaker
     // the underscores signal to other developers not to reference the variable anywhere else
     // in C#, access levels are a first-class language feature, and property access is part of the "encapsulation" principle of OOP software design
     class Employee{
+        // PROPERTIES ----------------------------------------
         // accessModifier dataType propertyName
         public string FirstName;
         public string LastName;
         public int Id;
         public string PhotoUrl;
+
+        // CONSTRUCTOR ----------------------------------------
         // in C#, a class's constructor method has the same name as its class and has a few specificities:
         // properties must be declared in the class before they are used in the constructor
         // the constructor method must be made public
         // to distinguish between public and private variables, use PascalCase for public and camelCase for private
-        public Employee(string firstName, string lastName) {
+        public Employee(string firstName, string lastName, int id, string photoUrl) {
             FirstName = firstName;
             LastName = lastName;
+            Id = id;
+            PhotoUrl = photoUrl;
         }
 
+        // METHODS ----------------------------------------
         // a getter to concatenate first and last name in proper formatting
         // accessModifier dataType methodName
         public string GetFullName() {
