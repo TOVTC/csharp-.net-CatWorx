@@ -30,5 +30,13 @@ namespace CatWorx.BadgeMaker
                 Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetFullName(), employees[i].GetPhotoUrl()));
             }
         }
+
+        // CSV creation pseudocode:
+        // add static method to Util to create CSV file
+        // call this method from Program, passing in list of employees
+        // in the method, check whetehr a data folder exists, if not, create it
+        // create a new file located at data/employees.csv
+        // loop over given employees
+        // write each employee's info as a comma-separated string to the CSV file
     }
 }
