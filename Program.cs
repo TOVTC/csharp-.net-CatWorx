@@ -1,4 +1,4 @@
-﻿// import directives (below are implicitly imported, though)
+﻿// import directives (below are implicitly/automatically imported, though)
 using System;
 using System.Collections.Generic;
 
@@ -80,8 +80,9 @@ namespace CatWorx.BadgeMaker
         {
             // we call our GetEmployees method and then call our PrintEmployees method, passing in the returned employee list
             List<Employee> employees = GetEmployees();
-            // call the public static method available in Util.cs
+            // call the public static methods available in Util.cs
             Util.PrintEmployees(employees);
+            Util.MakeCSV(employees);
         }
     }
 }

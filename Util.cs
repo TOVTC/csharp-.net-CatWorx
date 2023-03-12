@@ -1,6 +1,7 @@
 // this file will write employee data to a .CSV file, thus the program will never instantiate a new instance of this class
-// import directives (below are implicitly imported, though)
+// import directives (below are implicitly/automatically imported, though)
 using System;
+using System.IO; // import the System.IO namespace for the Directory and StreamWriter classes
 using System.Collections.Generic;
 
 // declared in the same namespace as the rest of the program, so it is accessible
@@ -31,11 +32,27 @@ namespace CatWorx.BadgeMaker
             }
         }
 
-        // CSV creation pseudocode:
-        // add static method to Util to create CSV file
-        // call this method from Program, passing in list of employees
-        // in the method, check whetehr a data folder exists, if not, create it
-        // create a new file located at data/employees.csv
+        // MAKE CSV METHOD ----------------------------------------
+        // outputs the employee list to a new .CSV file in a directory called "data"
+        // the Directory and StreamWriter classes fall under the System.IO namespace (implicitly/automatically imported above)
+        public static void MakeCSV(List<Employee> employees)
+        {
+            // check if "data" directory exists
+            if(!Directory.Exists("data"))
+            {
+                // if the directory does not exist, create a new directory
+                Directory.CreateDirectory("data");
+            }
+            // create a new csv file using the StreamWriter class
+            // using - keyword disposes of the StreamWriter object once the file is written (instead of taking up storage in memory after it's instantiated)
+            // using is the keyword both to import namespaces (above) and to temporarily use a resource (here)
+            // when using a resource temporarily, whatever is defined in the parentheses is only available within the subsequent set of curly braces
+            // once that block of code is run, the resource is removed (here, StreamWriter)
+            using (StreamWriter file = new StreamWriter("data/employees.csv"))
+            {
+                file.WriteLine("ID,Name,PhotoUrl");
+            }
+        }
         // loop over given employees
         // write each employee's info as a comma-separated string to the CSV file
     }
