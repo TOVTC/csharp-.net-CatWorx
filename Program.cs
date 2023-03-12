@@ -9,8 +9,28 @@ namespace CatWorx.BadgeMaker
     {
         // in C#, a method declaration or signature looks like this (the []'d' sections are optional):
         // [access_modifier] ["static"] return_type name([parameters])
-        // if a static method wants to call another method inside the same class directly, that method mst also be static
+
+        // STATIC METHODS ----------------------------------------
+        // if a static method wants to call another method inside the same class directly, that method must also be static
         // because Main() is static, any other method it needs to call within the program must also be static
+        // static methods belong to the class itself, instead of individual instances or objects of that class
+        // therefore, the object does not need to be instantiated before it can be used (as opposed to instance methods)
+        // it is possible for apps to have both static methods and instance methods
+            //class Example
+            // {
+            //   // Example.StaticMethod();
+            //   public static void StaticMethod()
+            //   {
+            //     Console.WriteLine("Bananas");
+            //   }
+            
+            //   // Example thing = new Example();
+            //   // thing.InstanceMethod();
+            //   public void InstanceMethod()
+            //   {
+            //     Console.WriteLine("Oranges");
+            //   }
+            // }
 
         // GET EMPLOYEES METHOD ----------------------------------------
         // the GetEmployees() method will return a list of employees, no parameters required
@@ -52,24 +72,6 @@ namespace CatWorx.BadgeMaker
             return employees;
         }
 
-        // PRINT EMPLOYEES METHOD ----------------------------------------
-        // the employees argument of type List is passed in when the method is called
-        static void PrintEmployees(List<Employee> employees)
-        {
-            for (int i = 0; i < employees.Count; i++)
-            {
-                // {0,-10} - we want the first argument {0} to be the id, left-aligned and padded to at least 10 characters {-10}
-                // {\t} - print a tab character
-                // {1,-20} - the next argument {1} is the name, left aligned and padded to 20 characters {-20}
-                // {\t} - print another tab
-                // {2} - print the last argument with no formatting
-                string template = "{0,-10}\t{1,-20}\t{2}";
-                // String.Format() takes a string to use as a template and operates like a template literal to fill in values
-                // in C#, each placeholder can define how its value is formatted and the values that follow the template in the list of arguments
-                Console.WriteLine(String.Format(template, employees[i].GetId(), employees[i].GetFullName(), employees[i].GetPhotoUrl()));
-            }
-        }
-
         // MAIN METHOD ----------------------------------------
         // Main() entry point function, initialized with or without parameters
         // static - scope is class level, not object level (can be invoked without creating a new class instance first)
@@ -78,7 +80,8 @@ namespace CatWorx.BadgeMaker
         {
             // we call our GetEmployees method and then call our PrintEmployees method, passing in the returned employee list
             List<Employee> employees = GetEmployees();
-            PrintEmployees(employees);
+            // call the public static method available in Util.cs
+            Util.PrintEmployees(employees);
         }
     }
 }
