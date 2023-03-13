@@ -84,5 +84,8 @@ namespace CatWorx.BadgeMaker
             Util.PrintEmployees(employees);
             Util.MakeCSV(employees);
         }
+        // import badge template file
+        // customize each badge by adding employee name, picture, and id number
+        // add new image to the data folder
     }
 }
