@@ -83,9 +83,7 @@ namespace CatWorx.BadgeMaker
             // call the public static methods available in Util.cs
             Util.PrintEmployees(employees);
             Util.MakeCSV(employees);
+            Util.MakeBadges(employees);
         }
-        // import badge template file
-        // customize each badge by adding employee name, picture, and id number
-        // add new image to the data folder
     }
 }
