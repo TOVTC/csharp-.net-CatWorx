@@ -87,7 +87,7 @@ namespace CatWorx.BadgeMaker
             // SkiaSharp is a graphics system for .NET and C# for rendering 2D images and is based on Google's Skia Graphics Library
             // SkiaSharp needs to be imported (not implicitly/automatically imported)
             
-            // SKBitmap layout variables (see below for explanation)
+            // SKBitmap layout variables to indicate image or text position in pixels (see below for explanation)
             int BADGE_WIDTH = 669;
             int BADGE_HEIGHT = 1044;
             
@@ -95,6 +95,10 @@ namespace CatWorx.BadgeMaker
             int PHOTO_TOP_Y = 215;
             int PHOTO_RIGHT_X = 486;
             int PHOTO_BOTTOM_Y = 517;
+
+            int COMPANY_NAME_Y = 150;
+            int EMPLOYEE_NAME_Y = 600;
+            int EMPLOYEE_ID_Y = 730;
 
             // HttpClient ----------------------------------------
             // HttpClient is a .NET Core class that can be used to send HTTP requests, read files, download webpages, and upload data
@@ -116,12 +120,6 @@ namespace CatWorx.BadgeMaker
                     // convert badge.png to a Stream using the OpenRead method from the System.IO File namespace
                     // the convert the Stream into a new SKImage using the FromEncodedData() method
                     SKImage background = SKImage.FromEncodedData(File.OpenRead("badge.png")); // pass in the filepath for the image
-                    // the Encode() method is the first step to save the SKImage object into a new file
-                    // Encode() returns the data type SKData, and when run with no arguments, encodes the image in a png format
-                    // SKData data = background.Encode();
-                    // the SaveTo() method takes in a Stream to save the data into
-                    // convert our destination filepath into a Stream using the OpenWrite() method, like above
-                    // data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
                     
                     // SKBitmap ----------------------------------------
                     // a bitmap is a representation of an image or graphic that uses pixels to create an image
@@ -140,11 +138,44 @@ namespace CatWorx.BadgeMaker
                     // use the DrawImage() method again to insert the employee photo onto the SKCanvas with location coordinates and size dimensions
                     canvas.DrawImage(photo, new SKRect(PHOTO_LEFT_X, PHOTO_TOP_Y, PHOTO_RIGHT_X, PHOTO_BOTTOM_Y)); // see variable declarations above
 
-                    // create the final badge - test to see that the images have been inserted
+                    // the SKCanvas DrawText() class draws a specified text string starting at the specified coodrinates using an SKPaint object
+                    // DrawText(String, Single, Single, SKPaint);
+                    // the first argument is the string to be printed, the next two are x and y coordinates, which are of data type single (the float keyword is an alias for System.single), and an SKPaint object
+                    // SKPaint is an object that defines specific characteristics about the text to be drawn (colour, font, size, alignment, etc.)
+                    
+                    // instantiate a new SKPaint object and add our specific properties
+                    SKPaint paint = new SKPaint();
+                    paint.TextSize = 42.0f;
+                    paint.IsAntialias = true;
+                    paint.Color = SKColors.White;
+                    paint.IsStroke = false;
+                    paint.TextAlign = SKTextAlign.Center;
+                    paint.Typeface = SKTypeface.FromFamilyName("Arial");
+
+                    // write company name
+                    // because we want our text centered on the badge, our second argument (x coordinate) will be computed as half the value of the width of the badge (BADGE_WIDTH/2f)
+                    // don't forget the f suffix so our product is saved as a float datatype, otherwise it would be rounded to the nearest whole number (int cannot hold decimal values)
+                    canvas.DrawText(employees[i].GetCompanyName(), BADGE_WIDTH/2f, COMPANY_NAME_Y, paint); // see above for variables
+
+                    // write employee name
+                    // update the font colour
+                    paint.Color = SKColors.Black;
+                    canvas.DrawText(employees[i].GetFullName(), BADGE_WIDTH/2f, EMPLOYEE_NAME_Y, paint); // see above for variables
+
+                    // write employee id
+                    // update font
+                    paint.Typeface = SKTypeface.FromFamilyName("Courier New");
+                    canvas.DrawText(employees[i].GetId().ToString(), BADGE_WIDTH/2f, EMPLOYEE_ID_Y, paint); // see above for variables
+
+                    // create the final badge - test to see that the images and text have been inserted
                     // pass the badge bitmap into the FromBitmap() method to create a new SKImage
                     SKImage finalImage = SKImage.FromBitmap(badge);
-                    // take the SKImage and use the Encode() method with no arguments to convert to a png
+                    // the Encode() method is the first step to save the SKImage object into a new file
+                    // Encode() returns the data type SKData, and when run with no arguments, encodes the image in a png format
+                    // take the SKImage and use the Encode() method to convert to a png
                     SKData data = finalImage.Encode();
+                    // the SaveTo() method takes in a Stream to save the data into
+                    // convert our destination filepath into a Stream using the OpenWrite() method
                     // save the png file to the specified filepath
                     data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
                 }
