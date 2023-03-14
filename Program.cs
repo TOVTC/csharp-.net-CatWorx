@@ -76,14 +76,17 @@ namespace CatWorx.BadgeMaker
         // Main() entry point function, initialized with or without parameters
         // static - scope is class level, not object level (can be invoked without creating a new class instance first)
         // void - return type of this executable method (nothing is returned)
-        static void Main(string[] args)
+        // basic formatting of Main(): static void Main(string[] args)
+        // Main() method was updated to include async and Task to allow for asynchronous method in GetBadges() in Util
+        // the return type for an async method with no return value is Task as opposed to void
+        async static Task Main(string[] args)
         {
             // we call our GetEmployees method and then call our PrintEmployees method, passing in the returned employee list
             List<Employee> employees = GetEmployees();
             // call the public static methods available in Util.cs
             Util.PrintEmployees(employees);
             Util.MakeCSV(employees);
-            Util.MakeBadges(employees);
+            await Util.MakeBadges(employees);
         }
     }
 }
