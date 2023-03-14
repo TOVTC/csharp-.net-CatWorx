@@ -176,8 +176,10 @@ namespace CatWorx.BadgeMaker
                     SKData data = finalImage.Encode();
                     // the SaveTo() method takes in a Stream to save the data into
                     // convert our destination filepath into a Stream using the OpenWrite() method
-                    // save the png file to the specified filepath
-                    data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
+                    // use string interpolation to dynamically create filepaths so multiple badges can be created
+                    // but OpenWrite can't read string interpolation, so convert the file name into a string using String.Format() first 
+                    string template = "data/{0}_badge.png";
+                    data.SaveTo(File.OpenWrite(string.Format(template, employees[i].GetId())));
                 }
             }
         }
