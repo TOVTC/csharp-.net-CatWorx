@@ -107,14 +107,16 @@ namespace CatWorx.BadgeMaker
             {
                 for (int i = 0; i < employees.Count; i++)
                 {
-                    // convert photo url into SKImage
-                        // use instance method in Employee class GetPhotoUrl()
-                        // convert the url into a stream
-                            // HttpClient.GetStreamAsync() - sends a GET request to the specified uri and returns the response body as a Stream in an async operation
-                        // convert stream into SKImage
-                            // SKImage.FromEncodedData() - creates an SKImage from a Stream
                     // convert badge template into SKImage
                     // place the images onto a canvas
+
+                    // use instance method in Employee class GetPhotoUrl()
+                    // GetStreamAsync() - sends a GET request to the specified uri and returns the response body as a Stream in an async operation (converts url into a Stream)
+                    // SKImage.FromEncodedData() - creates an SKImage from a Stream
+                    SKImage photo = SKImage.FromEncodedData(await client.GetStreamAsync(employees[i].GetPhotoUrl()));
+                    // test to see that the photo SKImage was properly created:
+                    SKData data = photo.Encode();
+                    data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
                 }
             }
         }
