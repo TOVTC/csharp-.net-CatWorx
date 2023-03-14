@@ -86,6 +86,10 @@ namespace CatWorx.BadgeMaker
             // SKIASHARP ----------------------------------------
             // SkiaSharp is a graphics system for .NET and C# for rendering 2D images and is based on Google's Skia Graphics Library
             // SkiaSharp needs to be imported (not implicitly/automatically imported)
+            
+            // SKBitmap layout variables (see below for explanation)
+            int BADGE_WIDTH = 669;
+            int BADGE_HEIGHT = 1044;
 
             // HttpClient ----------------------------------------
             // HttpClient is a .NET Core class that can be used to send HTTP requests, read files, download webpages, and upload data
@@ -95,7 +99,7 @@ namespace CatWorx.BadgeMaker
             {
                 for (int i = 0; i < employees.Count; i++)
                 {
-                    // GetStreamAsync ----------------------------------------
+                    // SKImages ----------------------------------------
                     // convert the employee url into an SKImage object to access the methods in this class
                     // use the GetPhotoUrl() instance method in the Employee class to retrieve the employee's photo
                     // GetStreamAsync() - sends a GET request to the specified uri and returns the response body as a Stream in an async operation (converts url into a Stream)
@@ -109,10 +113,26 @@ namespace CatWorx.BadgeMaker
                     SKImage background = SKImage.FromEncodedData(File.OpenRead("badge.png")); // pass in the filepath for the image
                     // the Encode() method is the first step to save the SKImage object into a new file
                     // Encode() returns the data type SKData, and when run with no arguments, encodes the image in a png format
-                    SKData data = background.Encode();
+                    // SKData data = background.Encode();
                     // the SaveTo() method takes in a Stream to save the data into
                     // convert our destination filepath into a Stream using the OpenWrite() method, like above
-                    data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
+                    // data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
+                    
+                    // SKBitmap ----------------------------------------
+                    // a bitmap is a representation of an image or graphic that uses pixels to create an image
+                    // the SKBitmap data type allows the pixel count on the x-axis and y-axis of a 2D image to precisely map placement and size
+                    // to create an SKBitmap instance, initialize with size parameters (declared above)
+                    SKBitmap badge = new SKBitmap(BADGE_WIDTH, BADGE_HEIGHT); // height and width reflect the size of the badge
+                    
+                    // SKCanvas ----------------------------------------
+                    // convert the SKBitmap into an SKCanvas object to access the SKCanvas methods
+                    // the SKCanvas acts as a wrapper around the badge bitmap and allows direct graphical modifications to the badge
+                    SKCanvas canvas = new SKCanvas(badge);
+                    // DrawImage() - allows us to draw images onto the badge (insert a badge template image object named background onto the badge)
+                    // the method's arguments takes an SKImage and uses the SKRectangle object for placement and size
+                    // SKRect - a SkiaSharp class that the allows the allocation of position and size on the badge (the arguments refer to the coordinates for the upper left and lower right corners of the rectangle)
+                    canvas.DrawImage(background, new SKRect(0, 0, BADGE_WIDTH, BADGE_HEIGHT)); // (x coord of upper left, y coord of upper left, x coord of lower right, y coord of lower right)
+
                 }
             }
         }
