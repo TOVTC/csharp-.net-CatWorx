@@ -90,6 +90,11 @@ namespace CatWorx.BadgeMaker
             // SKBitmap layout variables (see below for explanation)
             int BADGE_WIDTH = 669;
             int BADGE_HEIGHT = 1044;
+            
+            int PHOTO_LEFT_X = 184;
+            int PHOTO_TOP_Y = 215;
+            int PHOTO_RIGHT_X = 486;
+            int PHOTO_BOTTOM_Y = 517;
 
             // HttpClient ----------------------------------------
             // HttpClient is a .NET Core class that can be used to send HTTP requests, read files, download webpages, and upload data
@@ -99,7 +104,7 @@ namespace CatWorx.BadgeMaker
             {
                 for (int i = 0; i < employees.Count; i++)
                 {
-                    // SKImages ----------------------------------------
+                    // SKImage ----------------------------------------
                     // convert the employee url into an SKImage object to access the methods in this class
                     // use the GetPhotoUrl() instance method in the Employee class to retrieve the employee's photo
                     // GetStreamAsync() - sends a GET request to the specified uri and returns the response body as a Stream in an async operation (converts url into a Stream)
@@ -132,7 +137,16 @@ namespace CatWorx.BadgeMaker
                     // the method's arguments takes an SKImage and uses the SKRectangle object for placement and size
                     // SKRect - a SkiaSharp class that the allows the allocation of position and size on the badge (the arguments refer to the coordinates for the upper left and lower right corners of the rectangle)
                     canvas.DrawImage(background, new SKRect(0, 0, BADGE_WIDTH, BADGE_HEIGHT)); // (x coord of upper left, y coord of upper left, x coord of lower right, y coord of lower right)
+                    // use the DrawImage() method again to insert the employee photo onto the SKCanvas with location coordinates and size dimensions
+                    canvas.DrawImage(photo, new SKRect(PHOTO_LEFT_X, PHOTO_TOP_Y, PHOTO_RIGHT_X, PHOTO_BOTTOM_Y)); // see variable declarations above
 
+                    // create the final badge - test to see that the images have been inserted
+                    // pass the badge bitmap into the FromBitmap() method to create a new SKImage
+                    SKImage finalImage = SKImage.FromBitmap(badge);
+                    // take the SKImage and use the Encode() method with no arguments to convert to a png
+                    SKData data = finalImage.Encode();
+                    // save the png file to the specified filepath
+                    data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
                 }
             }
         }
