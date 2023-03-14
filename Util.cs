@@ -83,21 +83,9 @@ namespace CatWorx.BadgeMaker
         // an asynchronous method will have a return type of Task if the method does not return anything
         // the return type will be Task<TResult> if the async method does return something, and the <TResult> value is replaced with the return type of the method
         {
-            // // SKIASHARP ----------------------------------------
-            // // SkiaSharp is a graphics system for .NET and C# for rendering 2D images and is based on Google's Skia Graphics Library
-            // // SkiaSharp needs to be imported (not implicitly/automatically imported)
-
-            // // first, convert badge.png (downloaded from https://imgur.com/0EMSs68) into an SKImage object to access the methods in this class:
-            // // System.IO.Stream is a class that allows reading and writing of bytes or data from a source
-            // // convert badge.png to a Stream using the OpenRead method from the System.IO File namespace
-            // // the convert the Stream into a new SKImage using the FromEncodedData() method
-            // SKImage newImage = SKImage.FromEncodedData(File.OpenRead("badge.png")); // pass in the filepath for the image
-            // // the Encode() method is the first step to save the SKImage object into a new file
-            // // Encode() returns the data type SKData, and when run with no arguments, encodes the image in a png format
-            // SKData data = newImage.Encode();
-            // // the SaveTo() method takes in a Stream to save the data into
-            // // convert our destination filepath into a Stream using the OpenWrite() method, like above
-            // data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
+            // SKIASHARP ----------------------------------------
+            // SkiaSharp is a graphics system for .NET and C# for rendering 2D images and is based on Google's Skia Graphics Library
+            // SkiaSharp needs to be imported (not implicitly/automatically imported)
 
             // HttpClient ----------------------------------------
             // HttpClient is a .NET Core class that can be used to send HTTP requests, read files, download webpages, and upload data
@@ -107,15 +95,23 @@ namespace CatWorx.BadgeMaker
             {
                 for (int i = 0; i < employees.Count; i++)
                 {
-                    // convert badge template into SKImage
-                    // place the images onto a canvas
-
-                    // use instance method in Employee class GetPhotoUrl()
+                    // GetStreamAsync ----------------------------------------
+                    // convert the employee url into an SKImage object to access the methods in this class
+                    // use the GetPhotoUrl() instance method in the Employee class to retrieve the employee's photo
                     // GetStreamAsync() - sends a GET request to the specified uri and returns the response body as a Stream in an async operation (converts url into a Stream)
+                    // System.IO.Stream is a class that allows reading and writing of bytes or data from a source
                     // SKImage.FromEncodedData() - creates an SKImage from a Stream
                     SKImage photo = SKImage.FromEncodedData(await client.GetStreamAsync(employees[i].GetPhotoUrl()));
-                    // test to see that the photo SKImage was properly created:
-                    SKData data = photo.Encode();
+                    // create a new SKImage from our badge.png layout image
+                    // convert badge.png (downloaded from https://imgur.com/0EMSs68) into an SKImage object to access the methods in this class
+                    // convert badge.png to a Stream using the OpenRead method from the System.IO File namespace
+                    // the convert the Stream into a new SKImage using the FromEncodedData() method
+                    SKImage background = SKImage.FromEncodedData(File.OpenRead("badge.png")); // pass in the filepath for the image
+                    // the Encode() method is the first step to save the SKImage object into a new file
+                    // Encode() returns the data type SKData, and when run with no arguments, encodes the image in a png format
+                    SKData data = background.Encode();
+                    // the SaveTo() method takes in a Stream to save the data into
+                    // convert our destination filepath into a Stream using the OpenWrite() method, like above
                     data.SaveTo(File.OpenWrite("data/employeeBadge.png"));
                 }
             }
