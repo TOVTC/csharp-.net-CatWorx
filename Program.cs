@@ -16,22 +16,22 @@ namespace CatWorx.BadgeMaker
         // static methods belong to the class itself, instead of individual instances or objects of that class
         // therefore, the object does not need to be instantiated before it can be used (as opposed to instance methods)
         // it is possible for apps to have both static methods and instance methods
-            //class Example
-            // {
-            //   // Example.StaticMethod();
-            //   public static void StaticMethod()
-            //   {
-            //     Console.WriteLine("Bananas");
-            //   }
+        /*    class Example
+            {
+              // Example.StaticMethod();
+              public static void StaticMethod()
+              {
+                Console.WriteLine("Bananas");
+              }
             
-            //   // Example thing = new Example();
-            //   // thing.InstanceMethod();
-            //   public void InstanceMethod()
-            //   {
-            //     Console.WriteLine("Oranges");
-            //   }
-            // }
-
+              // Example thing = new Example();
+              // thing.InstanceMethod();
+              public void InstanceMethod()
+              {
+                Console.WriteLine("Oranges");
+              }
+            }
+        */
         // MAIN METHOD ----------------------------------------
         // Main() entry point function, initialized with or without parameters
         // static - scope is class level, not object level (can be invoked without creating a new class instance first)

@@ -87,20 +87,55 @@ namespace CatWorx.BadgeMaker{
                 // Newtonsoft.Json allows access to the JObject class that allows us to parse JSON
                 // JObject.Parse() converts the string downloaded from the API into a JObject
                 JObject json = JObject.Parse(response);
+                Console.WriteLine(json);
+                // the data returned looks like this:
+                    /* {
+                        "results": [
+                            {
+                            "name": {
+                                "title": "Ms",
+                                "first": "Esther",
+                                "last": "Watkins"
+                            },
+                            "id": {
+                                "name": "SSN",
+                                "value": "269-54-1695"
+                            },
+                            "picture": {
+                                "large": "https://randomuser.me/api/portraits/women/41.jpg",
+                                "medium": "https://randomuser.me/api/portraits/med/women/41.jpg",
+                                "thumbnail": "https://randomuser.me/api/portraits/thumb/women/41.jpg"
+                            }
+                            },
+                    } */
                 // the SelectToken() allows us to use JSON dot and bracket notation to retrieve specific pieces of information
                 // the dot and bracket notation must be passed into SelectToken() as a string (e.g. json.SelectToken("results[0].name.first"))
                 // json.SelectToken("results") will provide the entire array to iterate through
                 // however, a JObject isn't a real array, so a for loop will not work for iterating
-                // Console.WriteLine(json.SelectToken("results"));
-                // foreach (JToken token in json.SelectToken("results")){
-                //     Console.WriteLine(token);
-                // }
-                
-                for (int i = 0; i < 10; i++)
-                {
-                    string template = "results[{0}].name.first";
-                    Console.WriteLine(json.SelectToken(String.Format(template, i)));
+
+                // ! - null forgiving operator tells the compiler that this expression is not null
+                // the error otherwise reads "dereference of a possily null reference"
+                // JToken is an abstract base class to refer to items contained in a JObject
+                // you can later check the Type property of the JToken to properly cast it
+                // for more info: https://stackoverflow.com/questions/38558844/jcontainer-jobject-jtoken-and-linq-confusion#:~:text=The%20JToken%20hierarchy%20looks%20like,JProperties)%20JProperty%20%2D%20represents%20a%20JSON
+                foreach (JToken token in json.SelectToken("results")!) {
+                    // parse the JSON data
+                    // instantiate a new Employee for each token returned in json.results
+                    Employee emp = new Employee
+                    (
+                        // for each employee, retrieve the name and conver to string
+                        token.SelectToken("name.first")!.ToString(),
+                        token.SelectToken("name.last")!.ToString(),
+                        // retrive the id from its value property, then convert it to a string, replacing the dash marks with nothing
+                        // then convert the id string into an integer
+                        Int32.Parse(token.SelectToken("id.value")!.ToString().Replace("-", "")),
+                        // retrieve the picture url and convert it to a string
+                        token.SelectToken("picture.large")!.ToString()
+                    );
+                    // add the emp object to the employee list
+                    employees.Add(emp);
                 }
+                
             }
             return employees;
         }
