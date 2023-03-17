@@ -91,14 +91,18 @@ namespace CatWorx.BadgeMaker{
                 // the dot and bracket notation must be passed into SelectToken() as a string (e.g. json.SelectToken("results[0].name.first"))
                 // json.SelectToken("results") will provide the entire array to iterate through
                 // however, a JObject isn't a real array, so a for loop will not work for iterating
-                Console.WriteLine(json.SelectToken("results[0].name.first"));
-                Console.WriteLine(json.SelectToken("results[1].name.first"));
-                Console.WriteLine(json.SelectToken("results[2].name.first"));
+                // Console.WriteLine(json.SelectToken("results"));
+                // foreach (JToken token in json.SelectToken("results")){
+                //     Console.WriteLine(token);
+                // }
+                
+                for (int i = 0; i < 10; i++)
+                {
+                    string template = "results[{0}].name.first";
+                    Console.WriteLine(json.SelectToken(String.Format(template, i)));
+                }
             }
             return employees;
         }
-
-        // Convert JSON to C# data types
-        // create a new employee for each person that we fetched from the API
     }
 }
