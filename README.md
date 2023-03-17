@@ -25,8 +25,8 @@
   ## Usage Information<a name="usage"></a>
   
   This application is hardcoded to create badges for CatWorx employees, but the Employee model can be updated on line 59 to return any company's name.</br>
-  </br>![CatWorx Badge Generator](./catworx-badges "CatWorx Badge Generator")</br></br>
-  </br>![CatWorx Badge Generator](./catworx-app "CatWorx Badge Generator")</br></br>
+  </br>![CatWorx Badge Generator](./catworx-badges.png "CatWorx Badge Generator")</br></br>
+  </br>![CatWorx Badge Generator](./catworx-app.png "CatWorx Badge Generator")</br></br>
     
   ## Authors & Acknowledgements<a name="credits"></a>
   
