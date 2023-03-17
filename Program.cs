@@ -41,6 +41,7 @@ namespace CatWorx.BadgeMaker
         // the return type for an async method with no return value is Task as opposed to void
         async static Task Main(string[] args)
         {
+            // instantiate an empty employees variable that stores a List of Employee objects
             List<Employee> employees;
             Console.WriteLine("Would you like to manually input employee data?\n(Type any input for yes, leave blank to fetch employee data from the Random User Generator API)");
                 // get a name from the console and assign it to a variable
@@ -49,10 +50,12 @@ namespace CatWorx.BadgeMaker
                 // ?? checks whether the value from the command line is null (because input can only be of type string) and replaces it with the value after the operator (here it's an empty string)
                 if (fetch == "")
                 {
+                    // run the public static GetFromApi() method available in PeopleFetcher.cs
                     employees = await PeopleFetcher.GetFromApi();
                 }
                 else
                 {
+                    // run the public static GetEmployees() method available in PeopleFetcher.cs
                     employees = PeopleFetcher.GetEmployees();
                 }
                 // call the public static methods available in Util.cs
