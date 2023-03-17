@@ -2,6 +2,8 @@
 // import directives (below are implicitly/automatically imported, though)
 using System;
 using System.Collections.Generic;
+using System.Net.Http; // import Http to use HttpClient class to import or download employee information from employee list
+using System.Threading.Tasks; // allows us to use the Task object in the MakeBadges() method
 
 // one way to include employee data without manually typing it is to import a CSV, which would use the StreamReader class
 // this app will retrieve employee data from the Random User Generator API from the (https://randomuser.me/api/?results=10&nat=us&inc=name,id,picture) endpoint instead
@@ -50,8 +52,23 @@ namespace CatWorx.BadgeMaker{
             return employees;
         }
 
-        // create the PeopleFetcher class containing the GetEmployees() method from Program.cs
-        // create a new method called GetFromApi() in PeopleFetcher
+        // an asynchronous method will have a return type of Task if the method does not return anything
+        // the return type will be Task<TResult> if the async method does return something, and the <TResult> value is replaced with the return type of the method
+        async public static Task<List<Employee>> GetFromApi()
+        {
+            List<Employee> employees = new List<Employee>();
+            // HttpClient is a .NET Core class that can be used to send HTTP requests, read files, download webpages, and upload data
+            // in this app, HttpClient will be used to import or download employee information (automatically/implicitly imported above)
+            // the using keyword discards the instance of HttpClient after the codeblock is run to save on memory
+            using (HttpClient client = new HttpClient())
+            {
+                // GetStringAsync will retrieve all information from the specified resource as a string
+                string response = await client.GetStringAsync("https://randomuser.me/api/?results=10&nat=us&inc=name,id,picture");
+                Console.WriteLine(response);
+            }
+            return employees;
+        }
+
         // make an HTTP request to the API endpoint
         // Convert JSON to C# data types
         // create a new employee for each person that we fetched from the API

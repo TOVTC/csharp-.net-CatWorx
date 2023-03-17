@@ -42,7 +42,8 @@ namespace CatWorx.BadgeMaker
         async static Task Main(string[] args)
         {
             // we call our GetEmployees method and then call our PrintEmployees method, passing in the returned employee list
-            List<Employee> employees = PeopleFetcher.GetEmployees();
+            // List<Employee> employees = PeopleFetcher.GetEmployees();
+            List<Employee> employees = await PeopleFetcher.GetFromApi();
             // call the public static methods available in Util.cs
             Util.PrintEmployees(employees);
             Util.MakeCSV(employees);

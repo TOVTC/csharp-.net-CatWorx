@@ -79,9 +79,11 @@ namespace CatWorx.BadgeMaker
         // void - no data returned from method
         // static - scoped to class, so can be invoked directly without instantiating an object
         // List<> - Employee parameters, data source of emplyee info
-        async public static Task MakeBadges(List<Employee> employees)
+
+        // ASYNC METHODS ----------------------------------------
         // an asynchronous method will have a return type of Task if the method does not return anything
         // the return type will be Task<TResult> if the async method does return something, and the <TResult> value is replaced with the return type of the method
+        async public static Task MakeBadges(List<Employee> employees)
         {
             // SKIASHARP ----------------------------------------
             // SkiaSharp is a graphics system for .NET and C# for rendering 2D images and is based on Google's Skia Graphics Library
