@@ -87,7 +87,6 @@ namespace CatWorx.BadgeMaker{
                 // Newtonsoft.Json allows access to the JObject class that allows us to parse JSON
                 // JObject.Parse() converts the string downloaded from the API into a JObject
                 JObject json = JObject.Parse(response);
-                Console.WriteLine(json);
                 // the data returned looks like this:
                     /* {
                         "results": [

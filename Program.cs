@@ -41,13 +41,24 @@ namespace CatWorx.BadgeMaker
         // the return type for an async method with no return value is Task as opposed to void
         async static Task Main(string[] args)
         {
-            // we call our GetEmployees method and then call our PrintEmployees method, passing in the returned employee list
-            // List<Employee> employees = PeopleFetcher.GetEmployees();
-            List<Employee> employees = await PeopleFetcher.GetFromApi();
-            // call the public static methods available in Util.cs
-            Util.PrintEmployees(employees);
-            Util.MakeCSV(employees);
-            await Util.MakeBadges(employees);
+            List<Employee> employees;
+            Console.WriteLine("Would you like to manually input employee data?\n(Type any input for yes, leave blank to fetch employee data from the Random User Generator API)");
+                // get a name from the console and assign it to a variable
+                string fetch = Console.ReadLine() ?? ""; // .NET runtime halts here and waits for input before it continues executing on the next line
+                // the null coalescing operator ?? is similar to ternary
+                // ?? checks whether the value from the command line is null (because input can only be of type string) and replaces it with the value after the operator (here it's an empty string)
+                if (fetch == "")
+                {
+                    employees = await PeopleFetcher.GetFromApi();
+                }
+                else
+                {
+                    employees = PeopleFetcher.GetEmployees();
+                }
+                // call the public static methods available in Util.cs
+                Util.PrintEmployees(employees);
+                Util.MakeCSV(employees);
+                await Util.MakeBadges(employees);
         }
     }
 }
